@@ -1,0 +1,448 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+
+.footer .icon-link {
+    font-size: 25px;
+    color: #000;
+}
+
+.link-block a,
+.link-block button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/* Ensure all publication link buttons have consistent styling */
+.publication-links .link-block a,
+.publication-links .link-block button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    height: auto;
+    min-height: 2.25em;
+}
+
+.dnerf {
+  font-variant: small-caps;
+}
+
+
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+.teaser {
+  font-family: 'Google Sans', sans-serif;
+}
+
+
+.publication-title {
+}
+
+.publication-banner {
+  max-height: parent;
+
+}
+
+.publication-banner video {
+  position: relative;
+  left: auto;
+  top: auto;
+  transform: none;
+  object-fit: fit;
+}
+
+.publication-header .hero-body {
+}
+
+.publication-title {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-authors {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-venue {
+    color: #555;
+    width: fit-content;
+    font-weight: bold;
+}
+
+.publication-awards {
+    color: #ff3860;
+    width: fit-content;
+    font-weight: bolder;
+}
+
+
+
+
+/* New */
+.unclickable {
+  cursor: default; /* Changes the cursor to default */
+  pointer-events: none; /* Disables click events */
+  opacity: 0.6; /* Makes it look disabled */
+}
+
+.carousel-image {
+  max-width: 50%;
+  height: auto;
+}
+
+.content p {
+  margin-bottom: 1.0em;
+  line-height: 1.6;
+  font-size: 1.05em;
+  font-weight: 500; /* Makes the font bolder */
+}
+
+.section.hero.is-light .title.is-3 {
+  margin-bottom: 1.5em;
+  font-weight: 700; /* Makes the title bolder */
+}
+
+.section.hero.is-light .content {
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+/* New */
+
+
+
+.button {
+  display: inline-flex;
+  align-items: center; /* Vertically centers the content */
+  justify-content: center; /* Horizontally centers the content */
+  vertical-align: middle; /* Ensures proper alignment with other elements */
+}
+.publication-authors {
+}
+
+.publication-authors a {
+   color: hsl(204, 86%, 53%) !important;
+}
+
+.publication-authors a:hover {
+    text-decoration: underline;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.publication-banner img {
+}
+
+.publication-authors {
+  /*color: #4286f4;*/
+}
+
+.publication-video {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+
+    overflow: hidden;
+    border-radius: 10px !important;
+}
+
+.publication-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.publication-body img {
+}
+
+.results-carousel {
+  overflow: hidden;
+}
+
+.results-carousel .item {
+  margin: 5px;
+  overflow: hidden;
+  padding: 20px;
+  font-size: 0;
+}
+
+.results-carousel video {
+  margin: 0;
+}
+
+.slider-pagination .slider-page {
+  background: #000000;
+}
+
+.eql-cntrb { 
+  font-size: 0.7em;
+}
+
+/* Floating Action Button Styles */
+.fab {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fab-button {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+}
+
+.fab-button:hover {
+  background: #ff5252;
+  transform: scale(1.1);
+}
+
+.fab-button span {
+  font-size: 18px;
+}
+
+.fab-tooltip {
+  position: absolute;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.fab-button:hover .fab-tooltip {
+  opacity: 1;
+}
+
+/* Mobile Responsive Styles */
+@media screen and (max-width: 768px) {
+  /* Typography adjustments for mobile */
+  .title.is-1 {
+    font-size: 2rem !important;
+    line-height: 1.2;
+  }
+  
+  .title.is-3 {
+    font-size: 1.5rem !important;
+  }
+  
+  .publication-title {
+    font-size: 1.8rem !important;
+    line-height: 1.3;
+  }
+  
+  .publication-authors {
+    font-size: 1rem !important;
+    line-height: 1.4;
+  }
+  
+  /* Mobile FAB positioning and sizing */
+  #floating-nav {
+    top: 10px !important;
+    left: 10px !important;
+    gap: 10px !important;
+  }
+  
+  #floating-nav .button {
+    width: 45px !important;
+    height: 45px !important;
+  }
+  
+  #floating-nav span {
+    font-size: 10px !important;
+  }
+  
+  #scroll-to-top-fab {
+    top: 10px !important;
+    right: 10px !important;
+  }
+  
+  #scroll-to-top-fab .button {
+    width: 45px !important;
+    height: 45px !important;
+  }
+  
+  #scroll-to-top-fab span {
+    font-size: 10px !important;
+  }
+  
+  /* Mobile carousel adjustments */
+  .carousel-image {
+    max-width: 100% !important;
+  }
+  
+  .results-carousel .item {
+    padding: 10px !important;
+  }
+  
+  /* Mobile publication links */
+  .publication-links {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  
+  .publication-links .link-block {
+    width: 100% !important;
+  }
+  
+  .publication-links .button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  
+  /* Mobile content sections */
+  .section.hero.is-light .content {
+    padding: 15px !important;
+  }
+  
+  .content p {
+    font-size: 1rem !important;
+    line-height: 1.5;
+  }
+  
+  /* Mobile comparison images */
+  .has-text-centered div[style*="margin-left: -70%"] {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  
+  .has-text-centered div[style*="margin-left: -20%"] {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  
+  /* Mobile citation section */
+  .content pre {
+    font-size: 12px !important;
+    padding: 15px !important;
+    overflow-x: auto;
+  }
+  
+  /* Mobile footer */
+  .footer .content p {
+    font-size: 0.9rem !important;
+    text-align: center !important;
+  }
+  
+  /* Mobile table adjustments */
+  .table-container {
+    font-size: 0.8rem !important;
+  }
+  
+  .table th,
+  .table td {
+    padding: 0.5em 0.25em !important;
+    font-size: 0.8rem !important;
+  }
+  
+  .table td small {
+    font-size: 0.7rem !important;
+  }
+}
+
+/* Extra small mobile devices (phones in portrait) */
+@media screen and (max-width: 480px) {
+  .title.is-1 {
+    font-size: 1.5rem !important;
+  }
+  
+  .publication-title {
+    font-size: 1.4rem !important;
+  }
+  
+  .publication-authors {
+    font-size: 0.9rem !important;
+  }
+  
+  /* Smaller FAB buttons for very small screens */
+  #floating-nav .button {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+  #scroll-to-top-fab .button {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+  #floating-nav span,
+  #scroll-to-top-fab span {
+    font-size: 9px !important;
+  }
+  
+  .content p {
+    font-size: 0.95rem !important;
+  }
+  
+  .content pre {
+    font-size: 11px !important;
+    padding: 10px !important;
+  }
+}
+
+/* Landscape mobile orientation */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .title.is-1 {
+    font-size: 1.8rem !important;
+  }
+  
+  .publication-title {
+    font-size: 1.6rem !important;
+  }
+  
+  /* Adjust FAB positioning for landscape */
+  #floating-nav {
+    top: 5px !important;
+    left: 5px !important;
+  }
+  
+  #scroll-to-top-fab {
+    top: 5px !important;
+    right: 5px !important;
+  }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+  .button {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+  
+  #floating-nav .button,
+  #scroll-to-top-fab .button {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+}
+

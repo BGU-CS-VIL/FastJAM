@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="a Fast Joint Alignment Model for Images">
+  <meta property="og:title" content="FastJAM" />
+  <meta property="og:description" content="a Fast Joint Alignment Model for Images" />
+  <meta property="og:url" content="https://bgu-cs-vil.github.io/FastJAM/" />
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <!-- <meta property="og:image" content="static/images/carousel3.jpg" /> -->
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+
+  <meta name="twitter:title" content="FastJAM">
+  <meta name="twitter:description" content="a Fast Joint Alignment Model for Images">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <!-- <meta name="twitter:image" content="static/images/your_twitter_banner_image.png"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="static/images/your_twitter_banner_image.png"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="Computer Vision, Graph Neural Network, Image Congealing, Joint Alignment, Regularization-free, Lie Algebra">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+
+
+  <title>FastJAM</title>
+  <!-- <link rel="icon" type="image/x-icon" href="static/images/favicon.ico"> -->
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+
+  <meta name="google-site-verification" content="Z_YLA_hUDWD_rnjJ8G3P4kfZ_bcPp1GIRemfMjwLHsE" />
+</head>
+
+<body>
+
+  <!-- Floating Action Button -->
+  <div id="floating-nav" style="position: fixed; top: 20px; left: 20px; z-index: 1000; display: none; flex-direction: column; gap: 15px;">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+      <a href="TODO" target="_blank" class="external-link button is-normal is-rounded is-dark" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; padding: 0;" title="Paper">
+        <span class="icon">
+          <i class="fas fa-file-pdf"></i>
+        </span>
+      </a>
+      <span style="font-size: 12px; color: #333; font-weight: 500; text-align: center;">Paper</span>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+      <a href="https://github.com/BGU-CS-VIL/FastJAM" target="_blank" class="external-link button is-normal is-rounded is-dark" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; padding: 0;" title="Code">
+        <span class="icon">
+          <i class="fab fa-github"></i>
+        </span>
+      </a>
+      <span style="font-size: 12px; color: #333; font-weight: 500; text-align: center;">Code</span>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+      <a href="TODO" target="_blank" class="external-link button is-normal is-rounded is-dark" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; padding: 0;" title="arXiv">
+        <span class="icon">
+          <i class="ai ai-arxiv"></i>
+        </span>
+      </a>
+      <span style="font-size: 12px; color: #333; font-weight: 500; text-align: center;">arXiv</span>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+      <a href="TODO" target="_blank" class="button is-normal is-rounded is-dark" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; padding: 0;" title="Video">
+        <span class="icon">
+          <svg width="16" height="16" viewBox="0 0 576 512" fill="currentColor">
+            <path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path>
+          </svg>
+        </span>
+      </a>
+      <span style="font-size: 12px; color: #333; font-weight: 500; text-align: center;">Video</span>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+      <button id="fab-copy-citation" class="button is-normal is-rounded is-dark" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; padding: 0;" title="Copy Citation">
+        <span class="icon">
+          <i class="fas fa-quote-left"></i>
+        </span>
+      </button>
+      <span style="font-size: 12px; color: #333; font-weight: 500; text-align: center;">Cite</span>
+    </div>
+  </div>
+
+  <!-- Scroll to Top FAB - Top Right -->
+  <div id="scroll-to-top-fab" style="position: fixed; top: 20px; right: 20px; z-index: 1000; display: none;">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+      <button id="fab-scroll-to-top" class="button is-normal is-rounded is-dark" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; padding: 0;" title="Scroll Up">
+        <span class="icon">
+          <i class="fas fa-chevron-up"></i>
+        </span>
+      </button>
+      <span style="font-size: 12px; color: #333; font-weight: 500; text-align: center;">Scroll Up</span>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">FastJAM: a Fast Joint Alignment Model for Images</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block"><a href="https://www.linkedin.com/in/omri-h-a9b97a1a2/" target="_blank">Omri Hirsch</a><sup>*</sup>,</span>
+              <span class="author-block"><a href="https://ronshapiraweber.github.io/" target="_blank">Ron Shapira Weber</a><sup>*</sup>,</span>
+              <span class="author-block"><a href="https://www.linkedin.com/in/shira-ifergane/" target="_blank">Shira Ifergane,</a></span>
+              <span class="author-block"><a href="https://www.cs.bgu.ac.il/~orenfr/" target="_blank">Oren Freifeld</a></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Ben-Gurion University of the Negev, Israel<br>NeurIPS 2025</span>
+              <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links is-flex is-flex-wrap-wrap is-justify-content-center">
+                <!-- Arxiv PDF link -->
+                <span class="link-block">
+                  <a href="TODO" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+
+                <!-- Github link -->
+                <span class="link-block">
+                    <a href="https://github.com/BGU-CS-VIL/FastJAM" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+
+                <!-- ArXiv abstract Link -->
+                <span class="link-block">
+                  <a href="TODO" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+
+                <!-- Video link -->
+                <span class="link-block">
+                  <a href="TODO" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <svg width="16" height="16" viewBox="0 0 576 512" fill="currentColor">
+                        <path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path>
+                      </svg>
+                    </span>
+                    <span>Video</span>
+                  </a>
+                </span>
+
+                <!-- Citation copy button -->
+                <span class="link-block">
+                  <button id="main-copy-citation" class="button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-quote-left"></i>
+                    </span>
+                    <span>Cite</span>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Teaser video-->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <img src="static/images/intro_fig.png" alt="FastJAM teaser" />
+      </div>
+    </div>
+  </section>
+  <!-- End teaser video -->
+
+  <!-- Paper abstract -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified" style="padding: 10px; background-color: #f5f5f5; border-radius: 8px;">
+            <p> 
+            Joint Alignment (JA) of images aims to align a collection of images into a unified coordinate frame, such that semantically-similar features appear at corresponding spatial locations.
+            Most existing approaches often require long training times, large-capacity models, and extensive hyperparameter tuning.
+            We introduce <b>FastJAM</b>, a rapid, graph-based method that drastically reduces the computational complexity of joint alignment tasks.
+            FastJAM leverages pairwise matches computed by an off-the-shelf image matcher, together with a rapid nonparametric clustering, to construct a graph representing intra- and inter-image keypoint relations.
+            A graph neural network propagates and aggregates these correspondences, efficiently predicting per-image homography parameters via image-level pooling.
+            Utilizing an inverse-compositional loss, that eliminates the need for a regularization term over the predicted transformations (and thus also obviates the hyperparameter tuning associated with such terms), FastJAM performs image JA quickly and effectively.
+            Experimental results on several benchmarks demonstrate that FastJAM achieves results better than existing modern JA methods in terms of alignment quality, while reducing computation time from hours or minutes to mere seconds.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- End paper abstract -->
+
+
+  <!-- Image carousel -->
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container">
+        <h2 class="title is-3 is-centered has-text-centered">Qualitative Results by FastJAM</h2>
+        <div id="results-carousel" class="carousel results-carousel">
+          <div class="item">
+            <img src="static/images/fig_ja/JA_bus_FastJAM.png" alt="JA bus" />
+            <h2 class="subtitle has-text-centered">
+              Joint Alignment SPair-71k Bus - FastJAM
+            </h2>
+          </div>
+          <div class="item">
+            <img src="static/images/fig_ja/JA_aeroplane_FastJAM.png" alt="JA aeroplane" />
+            <h2 class="subtitle has-text-centered">
+              Joint Alignment SPair-71k Aeroplane - FastJAM
+            </h2>
+          </div>
+          <div class="item">
+            <img src="static/images/fig_ja/JA_bird_FastJAM.png" alt="JA bird" />
+            <h2 class="subtitle has-text-centered">
+              Joint Alignment SPair-71k Bird - FastJAM
+            </h2>
+          </div>
+          <div class="item">
+            <img src="static/images/fig_ja/JA_motorbike_FastJAM.png" alt="JA motorbike" />
+            <h2 class="subtitle has-text-centered">
+              Joint Alignment SPair-71k Motorbike - FastJAM
+            </h2>
+          </div>
+          <div class="item">
+            <img src="static/images/fig_ja/JA_CUB_2_FastJAM.png" alt="JA laysan albatross" />
+            <h2 class="subtitle has-text-centered">
+              Joint Alignment CUB-200-2011 Laysan Albatross (Class #2) - FastJAM
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End image carousel -->
+
+<!-- How it Works Section -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">How FastJAM Works</h2>
+        <div class="content has-text-justified" style="padding: 10px; background-color: #f5f5f5; border-radius: 8px; margin-bottom: 20px;">
+          <p>
+            We intoduce <b>FastJAM</b> which operates through a three-stage pipeline: 
+            First, it leverages an off-the-shelf image matcher to compute pairwise correspondences between all image pairs in the collection. 
+            These correspondences are then constructed into a graph, as part of the construction of the graph, the Keypoints are being clustered via a rapid nonparametric clustering algorithm. 
+            Finally, a lightweight graph neural network aggregates these correspondences and predicts homography parameters for each image through image-level pooling.
+            The use of our novel Inverse-Compositional loss for Keypoints eliminates the need for complex regularization terms and extensive hyperparameter tuning.
+          </p>
+        </div>
+            <div class="has-text-centered" style="margin-left: -20%; margin-right: -20%;">
+              <img src="static/images/fig_method/method_fig.png" alt="FastJAM Method Overview" style="max-width: 100%;" />
+            </div>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <!-- Qualitative Comparison Section -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Qualitative Comparison</h2>
+          <div class="has-text-centered" style="margin-left: -70%; margin-right: -70%;">
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+              <div style="flex: 1; min-width: 300px; max-width: 50%;">
+                <img src="static/images/fig_comparison/comparison_tv_FastJAM.png" alt="Qualitative Comparison TV" style="width: 100%; height: auto;" />
+                <h2 class="subtitle has-text-centered">
+                  Qualitative Comparison SPair-71k TV - FastJAM
+                </h2>
+              </div>
+              <div style="flex: 1; min-width: 300px; max-width: 50%;">
+                <img src="static/images/fig_comparison/comparison_sheep_FastJAM.png" alt="Qualitative Comparison sheep" style="width: 100%; height: auto;" />
+                <h2 class="subtitle has-text-centered">
+                  Qualitative Comparison SPair-71k Sheep - FastJAM
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Qualitative Comparison Section -->
+
+  <!-- Runtime Comparison Section -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Runtime Comparison</h2>
+          <div class="content has-text-justified" style="padding: 10px; background-color: #f5f5f5; border-radius: 8px; margin-bottom: 20px;">
+            <p>
+              FastJAM demonstrates significant speed improvements over recent joint alignment methods. 
+              The table below compares runtime performance on three SPair-71k categories, showing that FastJAM 
+              achieves results in under a minute while other methods require over an hour.
+            </p>
+          </div>
+          
+          <div class="table-container" style="overflow-x: auto; margin: 20px 0;">
+            <table class="table is-bordered is-striped is-fullwidth" style="font-size: 0.9rem;">
+              <thead>
+                <tr style="background-color: #f8f9fa;">
+                  <th class="has-text-centered" style="font-weight: bold;">Method</th>
+                  <th class="has-text-centered" style="font-weight: bold;"># Params</th>
+                  <th class="has-text-centered" style="font-weight: bold;"># Losses</th>
+                  <th class="has-text-centered" style="font-weight: bold;"># HP</th>
+                  <th class="has-text-centered" style="font-weight: bold;">Atlas-free</th>
+                  <th class="has-text-centered" style="font-weight: bold;"># Epochs</th>
+                  <th class="has-text-centered" style="font-weight: bold;">Runtime</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Neural Congealing</strong><br><small class="has-text-grey">Ofri et al., CVPR 2023</small></td>
+                  <td class="has-text-centered">28.7M</td>
+                  <td class="has-text-centered">8</td>
+                  <td class="has-text-centered">8</td>
+                  <td class="has-text-centered has-text-danger"><i class="fas fa-times"></i></td>
+                  <td class="has-text-centered">8,000</td>
+                  <td class="has-text-centered">01:18:30 ± 00:06:18</td>
+                </tr>
+                <tr>
+                  <td><strong>ASIC</strong><br><small class="has-text-grey">Gupta et al., ICCV 2023</small></td>
+                  <td class="has-text-centered">7.9M</td>
+                  <td class="has-text-centered">4</td>
+                  <td class="has-text-centered">5</td>
+                  <td class="has-text-centered has-text-danger"><i class="fas fa-times"></i></td>
+                  <td class="has-text-centered">20,000</td>
+                  <td class="has-text-centered">01:06:38 ± 00:00:38</td>
+                </tr>
+                <tr>
+                  <td><strong>SpaceJAM</strong><br><small class="has-text-grey">Barel et al., ECCV 2024</small></td>
+                  <td class="has-text-centered">0.016M</td>
+                  <td class="has-text-centered">1</td>
+                  <td class="has-text-centered">0</td>
+                  <td class="has-text-centered has-text-success"><i class="fas fa-check"></i></td>
+                  <td class="has-text-centered">700</td>
+                  <td class="has-text-centered">00:06:00 ± 00:00:12</td>
+                </tr>
+                <tr style="background-color: #e8f5e8; border: 2px solid #4caf50;">
+                  <td><strong>FastJAM (Ours)</strong><br><small class="has-text-grey">NeurIPS 2025</small></td>
+                  <td class="has-text-centered"><strong>0.13M</strong></td>
+                  <td class="has-text-centered"><strong>1</strong></td>
+                  <td class="has-text-centered"><strong>0</strong></td>
+                  <td class="has-text-centered has-text-success"><i class="fas fa-check"></i></td>
+                  <td class="has-text-centered"><strong>600</strong></td>
+                  <td class="has-text-centered has-text-success"><strong>00:00:49 ± 00:00:04</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="content has-text-justified" style="padding: 15px; background-color: #e8f5e8; border-radius: 8px; border-left: 4px solid #4caf50;">
+            <p style="margin: 0; font-weight: 500;">
+              <strong>Key Results:</strong> FastJAM achieves <strong>95x faster</strong> runtime compared to Neural Congealing and <strong>7.4x faster</strong> than SpaceJAM, 
+              while maintaining better or equal alignment quality.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Runtime Comparison Section -->
+
+  <!-- Image carousel -->
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h2 class="title is-3">Image-to-Image Alignment by FastJAM</h2>
+        <div id="results-carousel" class="carousel results-carousel">
+          <div class="item">
+            <img src="static/images/fig_pairwise/pairwise_aeroplane_FastJAM.png" alt="Image-to-Image Alignment SPair-71k Aeroplane - FastJAM" class="carousel-image" />
+            <h2 class="subtitle">
+              Image-to-Image Alignment SPair-71k Aeroplane - FastJAM
+            </h2>
+          </div>
+          <div class="item">
+            <img src="static/images/fig_pairwise/pairwise_horse_FastJAM.png" alt="Image-to-Image Alignment SPair-71k Horse - FastJAM" class="carousel-image" />
+            <h2 class="subtitle">
+              Image-to-Image Alignment SPair-71k Horse - FastJAM
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End image carousel -->
+
+  <!-- Citation section -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Citation Information</h2>
+          <div class="content has-text-justified" style="padding: 10px; background-color: #f5f5f5; border-radius: 8px; position: relative;">
+            <button id="copy-citation" class="button is-small is-light" style="position: absolute; top: 10px; right: 10px;" title="Copy citation">
+              <span class="icon">
+                <i class="fas fa-copy"></i>
+              </span>
+            </button>
+            <pre style="background: #2d3748; color: #e2e8f0; padding: 20px; border-radius: 6px; font-family: 'Courier New', monospace; font-size: 14px; line-height: 1.5; margin: 0; white-space: pre-wrap; overflow-x: auto;"><code>@inproceedings{Hirsch:NeurIPS:2025:FastJAM,
+      title={{FastJAM}: a Fast Joint Alignment Model for Images},
+      author={Hirsch, Omri and Weber, Ron Shapira and Ifergane, Shira and Freifeld, Oren},
+      year={2025},
+      journal={NeurIPS},
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End citation section -->
+
+  <!-- Youtube video -->
+  <!-- <section class="hero is-small is-light">
+    <div class="hero-body">
+      <div class="container">
+        Paper video.
+        <h2 class="title is-3">Video Presentation</h2>
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+
+            <div class="publication-video">
+              Youtube embed code here
+              <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+  <!-- End youtube video -->
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+
+          <p style="font-size: small; text-align: left;">
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" style="color: inherit; text-decoration: none;">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank" style="color: inherit; text-decoration: none;">Nerfies</a> project page.
+            <br> This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" style="color: inherit; text-decoration: none;">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Default Statcounter code for FastJAM project website
+https://bgu-cs-vil.github.io/FastJAM/ -->
+  <script type="text/javascript">
+    var sc_project = 13015701;
+    var sc_invisible = 1;
+    var sc_security = "26985381"; 
+  </script>
+  <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+  <noscript>
+    <div class="statcounter"><a title="hit counter" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/13015701/0/26985381/1/" alt="hit counter"
+          referrerPolicy="no-referrer-when-downgrade"></a></div>
+  </noscript>
+  <!-- End of Statcounter Code -->
+
+  <script>
+    // Floating Action Button visibility logic
+    function checkFabVisibility() {
+      const fab = document.getElementById('floating-nav');
+      const scrollToTopFab = document.getElementById('scroll-to-top-fab');
+      const originalLinks = document.querySelector('.publication-links');
+      
+      if (!originalLinks) {
+        fab.style.display = 'flex';
+        scrollToTopFab.style.display = 'flex';
+        return;
+      }
+      
+      // Get the position of the original links section
+      const rect = originalLinks.getBoundingClientRect();
+      
+      // Check if the original links are visible in the viewport
+      // Consider them "not visible" if they're more than 100px above the top of the screen
+      const isVisible = rect.top >= -100 && rect.bottom <= window.innerHeight;
+      
+      if (isVisible) {
+        fab.style.display = 'none';
+        scrollToTopFab.style.display = 'none';
+      } else {
+        fab.style.display = 'flex';
+        scrollToTopFab.style.display = 'flex';
+      }
+    }
+    
+    // Wait for DOM to be ready
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initial check
+      checkFabVisibility();
+      
+      // Check on scroll and resize
+      window.addEventListener('scroll', checkFabVisibility);
+      window.addEventListener('resize', checkFabVisibility);
+      
+      // Copy citation functionality
+      const copyButton = document.getElementById('copy-citation');
+      if (copyButton) {
+        copyButton.addEventListener('click', function() {
+          const citationText = `@inproceedings{Hirsch:NeurIPS:2025:FastJAM,
+      title={{FastJAM}: a Fast Joint Alignment Model for Images},
+      author={Hirsch, Omri and Weber, Ron Shapira and Ifergane, Shira and Freifeld, Oren},
+      year={2025},
+      journal={NeurIPS}
+}`;
+          
+          navigator.clipboard.writeText(citationText).then(function() {
+            // Change button to show "Copied!" text
+            const originalHTML = copyButton.innerHTML;
+            copyButton.innerHTML = '<span>Copied!</span>';
+            copyButton.classList.add('is-success');
+            
+            setTimeout(function() {
+              copyButton.innerHTML = originalHTML;
+              copyButton.classList.remove('is-success');
+            }, 2000);
+          }).catch(function(err) {
+            console.error('Could not copy text: ', err);
+          });
+        });
+      }
+      
+      // FAB copy citation functionality
+      const fabCopyButton = document.getElementById('fab-copy-citation');
+      if (fabCopyButton) {
+        fabCopyButton.addEventListener('click', function() {
+          const citationText = `@inproceedings{Hirsch:NeurIPS:2025:FastJAM,
+      title={{FastJAM}: a Fast Joint Alignment Model for Images},
+      author={Hirsch, Omri and Weber, Ron Shapira and Ifergane, Shira and Freifeld, Oren},
+      year={2025},
+      journal={NeurIPS}
+}`;
+          
+          navigator.clipboard.writeText(citationText).then(function() {
+            // Change button to show "Copied!" text
+            const originalHTML = fabCopyButton.innerHTML;
+            fabCopyButton.innerHTML = '<span>Copied!</span>';
+            fabCopyButton.classList.add('is-success');
+            
+            setTimeout(function() {
+              fabCopyButton.innerHTML = originalHTML;
+              fabCopyButton.classList.remove('is-success');
+            }, 2000);
+          }).catch(function(err) {
+            console.error('Could not copy text: ', err);
+          });
+        });
+      }
+      
+      // Main copy citation functionality
+      const mainCopyButton = document.getElementById('main-copy-citation');
+      if (mainCopyButton) {
+        mainCopyButton.addEventListener('click', function() {
+          const citationText = `@inproceedings{Hirsch:NeurIPS:2025:FastJAM,
+      title={{FastJAM}: a Fast Joint Alignment Model for Images},
+      author={Hirsch, Omri and Weber, Ron Shapira and Ifergane, Shira and Freifeld, Oren},
+      year={2025},
+      journal={NeurIPS}
+}`;
+          
+          navigator.clipboard.writeText(citationText).then(function() {
+            // Change button to show "Copied!" text
+            const originalHTML = mainCopyButton.innerHTML;
+            mainCopyButton.innerHTML = '<span>Copied!</span>';
+            mainCopyButton.classList.add('is-success');
+            
+            setTimeout(function() {
+              mainCopyButton.innerHTML = originalHTML;
+              mainCopyButton.classList.remove('is-success');
+            }, 2000);
+          }).catch(function(err) {
+            console.error('Could not copy text: ', err);
+          });
+        });
+      }
+      
+      // Scroll to top functionality
+      const scrollToTopButton = document.getElementById('fab-scroll-to-top');
+      if (scrollToTopButton) {
+        scrollToTopButton.addEventListener('click', function() {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      }
+    });
+  </script>
+
+</body>
+
+</html>
