@@ -54,7 +54,7 @@
   <!-- Floating Action Button -->
   <div id="floating-nav" style="position: fixed; top: 20px; left: 20px; z-index: 1000; display: none; flex-direction: column; gap: 15px;">
     <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
-      <a href="TODO" target="_blank" class="external-link button is-normal is-rounded is-dark" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; padding: 0;" title="Paper">
+      <a href="https://arxiv.org/pdf/XXXX.XXXXX" target="_blank" class="external-link button is-normal is-rounded is-dark" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; padding: 0;" title="Paper">
         <span class="icon">
           <i class="fas fa-file-pdf"></i>
         </span>
@@ -70,7 +70,7 @@
       <span style="font-size: 12px; color: #333; font-weight: 500; text-align: center;">Code</span>
     </div>
     <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
-      <a href="https://github.com/BGU-CS-VIL/FastJAM" target="_blank" class="external-link button is-normal is-rounded is-dark" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; padding: 0;" title="arXiv">
+      <a href="https://arxiv.org/abs/XXXX.XXXXX" target="_blank" class="external-link button is-normal is-rounded is-dark" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; padding: 0;" title="arXiv">
         <span class="icon">
           <i class="ai ai-arxiv"></i>
         </span>
@@ -132,7 +132,7 @@
               <div class="publication-links is-flex is-flex-wrap-wrap is-justify-content-center">
                 <!-- Arxiv PDF link -->
                 <span class="link-block">
-                  <a href="TODO" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <a href="https://arxiv.org/pdf/XXXX.XXXXX" target="_blank" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                     </span>
@@ -154,7 +154,7 @@
 
                 <!-- ArXiv abstract Link -->
                 <span class="link-block">
-                  <a href="TODO" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <a href="https://arxiv.org/abs/XXXX.XXXXX" target="_blank" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="ai ai-arxiv"></i>
                     </span>
@@ -269,57 +269,7 @@
   </section>
   <!-- End image carousel -->
 
-<!-- How it Works Section -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">How FastJAM Works</h2>
-        <div class="content has-text-justified" style="padding: 10px; background-color: #f5f5f5; border-radius: 8px; margin-bottom: 20px;">
-          <p>
-            We intoduce <b>FastJAM</b> which operates through a three-stage pipeline: 
-            First, it leverages an off-the-shelf image matcher to compute pairwise correspondences between all image pairs in the collection. 
-            These correspondences are then constructed into a graph, as part of the construction of the graph, the Keypoints are being clustered via a rapid nonparametric clustering algorithm. 
-            Finally, a lightweight graph neural network aggregates these correspondences and predicts homography parameters for each image through image-level pooling.
-            The use of our novel Inverse-Compositional loss for Keypoints eliminates the need for complex regularization terms and extensive hyperparameter tuning.
-          </p>
-        </div>
-            <div class="has-text-centered" style="margin-left: -20%; margin-right: -20%;">
-              <img src="static/images/fig_method/method_fig.png" alt="FastJAM Method Overview" style="max-width: 100%;" />
-            </div>
-      </div>
-    </div>
-  </div>
-  </section>
-
-  <!-- Qualitative Comparison Section -->
-  <section class="section hero is-light">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-3">Qualitative Comparison</h2>
-          <div class="has-text-centered" style="margin-left: -70%; margin-right: -70%;">
-            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-              <div style="flex: 1; min-width: 300px; max-width: 50%;">
-                <img src="static/images/fig_comparison/comparison_tv_FastJAM.png" alt="Qualitative Comparison TV" style="width: 100%; height: auto;" />
-                <h2 class="subtitle has-text-centered">
-                  Qualitative Comparison SPair-71k TV - FastJAM
-                </h2>
-              </div>
-              <div style="flex: 1; min-width: 300px; max-width: 50%;">
-                <img src="static/images/fig_comparison/comparison_sheep_FastJAM.png" alt="Qualitative Comparison sheep" style="width: 100%; height: auto;" />
-                <h2 class="subtitle has-text-centered">
-                  Qualitative Comparison SPair-71k Sheep - FastJAM
-                </h2>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- End Qualitative Comparison Section -->
-
+  
   <!-- Runtime Comparison Section -->
   <section class="section hero is-light">
     <div class="container is-max-desktop">
@@ -399,6 +349,57 @@
     </div>
   </section>
   <!-- End Runtime Comparison Section -->
+
+<!-- How it Works Section -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">How FastJAM Works</h2>
+        <div class="content has-text-justified" style="padding: 10px; background-color: #f5f5f5; border-radius: 8px; margin-bottom: 20px;">
+          <p>
+            We intoduce <b>FastJAM</b> which operates through a three-stage pipeline: 
+            First, it leverages an off-the-shelf image matcher to compute pairwise correspondences between all image pairs in the collection. 
+            These correspondences are then constructed into a graph, as part of the construction of the graph, the Keypoints are being clustered via a rapid nonparametric clustering algorithm. 
+            Finally, a lightweight graph neural network aggregates these correspondences and predicts homography parameters for each image through image-level pooling.
+            The use of our novel Inverse-Compositional loss for Keypoints eliminates the need for complex regularization terms and extensive hyperparameter tuning.
+          </p>
+        </div>
+            <div class="has-text-centered" style="margin-left: -20%; margin-right: -20%;">
+              <img src="static/images/fig_method/method_fig.png" alt="FastJAM Method Overview" style="max-width: 100%;" />
+            </div>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <!-- Qualitative Comparison Section -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Qualitative Comparison</h2>
+          <div class="has-text-centered" style="margin-left: -70%; margin-right: -70%;">
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+              <div style="flex: 1; min-width: 300px; max-width: 50%;">
+                <img src="static/images/fig_comparison/comparison_tv_FastJAM.png" alt="Qualitative Comparison TV" style="width: 100%; height: auto;" />
+                <h2 class="subtitle has-text-centered">
+                  Qualitative Comparison SPair-71k TV - FastJAM
+                </h2>
+              </div>
+              <div style="flex: 1; min-width: 300px; max-width: 50%;">
+                <img src="static/images/fig_comparison/comparison_sheep_FastJAM.png" alt="Qualitative Comparison sheep" style="width: 100%; height: auto;" />
+                <h2 class="subtitle has-text-centered">
+                  Qualitative Comparison SPair-71k Sheep - FastJAM
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Qualitative Comparison Section -->
 
   <!-- Image carousel -->
   <section class="hero is-small">
