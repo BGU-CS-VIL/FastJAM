@@ -38,6 +38,23 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="static/css/index.css">
   
+  <!-- Custom CSS for video styling -->
+  <style>
+    /* Video container responsive styling */
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .video-container video {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+  </style>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
@@ -196,7 +213,20 @@
   <section class="hero teaser">
     <div class="container is-max-desktop">
       <div class="hero-body">
-        <img src="static/images/intro_fig.png" alt="FastJAM teaser" />
+        <div class="video-container" style="position: relative; width: 100%; max-width: 800px; margin: 0 auto;">
+          <video 
+            id="teaser-video" 
+            width="100%" 
+            height="auto" 
+            controls 
+            muted
+            preload="metadata"
+            style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"
+          >
+            <source src="static/videos/website_FastJAM_teaser_video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
       </div>
     </div>
   </section>
@@ -630,6 +660,108 @@ https://bgu-cs-vil.github.io/FastJAM/ -->
             behavior: 'smooth'
           });
         });
+      }
+      
+      // Picture-in-Picture functionality
+      const video = document.getElementById('teaser-video');
+      let isInPiP = false;
+      let videoContainer = null;
+      
+      if (video) {
+        // Check if Picture-in-Picture is supported
+        if ('pictureInPictureEnabled' in document) {
+          // Get the video container position
+          videoContainer = video.closest('.video-container');
+          
+          // Function to check if video is in viewport
+          function isVideoInViewport() {
+            if (!videoContainer) return true;
+            const rect = videoContainer.getBoundingClientRect();
+            return rect.top >= 0 && rect.bottom <= window.innerHeight;
+          }
+          
+          // Function to enter Picture-in-Picture
+          async function enterPiP() {
+            try {
+              if (!isInPiP && !document.pictureInPictureElement) {
+                await video.requestPictureInPicture();
+                isInPiP = true;
+              }
+            } catch (error) {
+              console.log('Picture-in-Picture not supported or failed:', error);
+            }
+          }
+          
+          // Function to exit Picture-in-Picture
+          async function exitPiP() {
+            try {
+              if (isInPiP && document.pictureInPictureElement) {
+                await document.exitPictureInPicture();
+                isInPiP = false;
+              }
+            } catch (error) {
+              console.log('Failed to exit Picture-in-Picture:', error);
+            }
+          }
+          
+          // Listen for scroll events
+          let scrollTimeout;
+          window.addEventListener('scroll', function() {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(function() {
+              const videoInViewport = isVideoInViewport();
+              const videoPlaying = !video.paused && !video.ended;
+              
+              // Only manage PiP if video is playing
+              if (videoPlaying) {
+                if (!videoInViewport && !isInPiP) {
+                  // Video is out of viewport and not in PiP, enter PiP
+                  enterPiP();
+                } else if (videoInViewport && isInPiP) {
+                  // Video is back in viewport and in PiP, exit PiP
+                  exitPiP();
+                }
+              }
+            }, 150); // Slightly longer debounce for better stability
+          });
+          
+          // Listen for PiP events
+          video.addEventListener('enterpictureinpicture', function() {
+            isInPiP = true;
+            console.log('Entered Picture-in-Picture');
+          });
+          
+          video.addEventListener('leavepictureinpicture', function() {
+            isInPiP = false;
+            console.log('Left Picture-in-Picture');
+          });
+          
+          // Listen for video play/pause to control PiP
+          video.addEventListener('play', function() {
+            // Small delay to ensure video is actually playing
+            setTimeout(function() {
+              if (!isVideoInViewport() && !isInPiP && !video.paused) {
+                enterPiP();
+              }
+            }, 200);
+          });
+          
+          // Listen for video pause to exit PiP if needed
+          video.addEventListener('pause', function() {
+            if (isInPiP) {
+              exitPiP();
+            }
+          });
+          
+          // Additional event listener for when video ends
+          video.addEventListener('ended', function() {
+            if (isInPiP) {
+              exitPiP();
+            }
+          });
+        } else {
+          console.log('Picture-in-Picture is not supported in this browser');
+        }
       }
     });
   </script>
